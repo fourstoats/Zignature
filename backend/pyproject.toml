@@ -1,0 +1,53 @@
+[project]
+name = "zignature-backend"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "django==4.2.*",
+    "djangorestframework>=3.15,<3.16",
+    "django-environ>=0.11,<0.12",
+    "psycopg[binary]>=3.1,<4",
+    "django-cors-headers>=4.0,<5",
+    "djangorestframework-simplejwt>=5.5.1",
+    "dj-rest-auth>=7.2.0",
+    "django-allauth>=65.16.1",
+    "requests>=2.33.1",
+    "google-auth[requests]>=2.49.2",
+    "drf-spectacular>=0.29.0",
+    "pillow>=12.2.0",
+    "django-filter>=25.1",
+]
+
+[dependency-groups]
+dev = [
+    "django-stubs>=6.0.3",
+    "djangorestframework-stubs>=3.16.9",
+    "mypy>=1.20.2",
+    "pytest>=8.0",
+    "pytest-django>=4.8",
+    "ruff>=0.4",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["apps", "common", "config"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.development"
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.mypy]
+ignore_missing_imports = true
+follow_imports = "skip"
+disable_error_code = "var-annotated,import-untyped,arg-type"

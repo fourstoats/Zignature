@@ -1,0 +1,54 @@
+# --- IDEs & OS ---
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.bak
+
+# --- Python & Django ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+backend/media/
+backend/static/
+backend/db.sqlite3
+backend/db.sqlite3-journal
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Node & Frontend ---
+node_modules/
+frontend/dist/
+frontend/.next/
+npm-debug.log*
+yarn-debug.log*
+.eslintcache
+
+# --- Environments & Secrets ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+
+# --- Docker & Infrastructure ---
+postgres_data/
+.docker/
+
+# --- Keep sensitive files but track examples ---
+!.env.example
+
+# --- Ensure Documentation is Tracked ---
+handbook/
+learning.md
+test.txt
+system.md
+implementation.md
+handbook.md
