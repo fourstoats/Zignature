@@ -54,7 +54,7 @@ const ContactPage = ({ embedded = false }) => {
               </div>
               <h3 className="text-2xl font-black text-primary-900 uppercase tracking-tighter mb-2">Job Seeker Support</h3>
               <p className="text-primary-700 font-bold mb-4">Need help with your profile, applications, or resume formatting?</p>
-              <a href="mailto:support@zignature.com" className="text-lg font-black text-primary-600 hover:text-primary-900 uppercase underline decoration-4 underline-offset-4">support@zignature.com</a>
+              <a href="mailto:support@zignature.com" className="text-lg font-black text-primary-600 hover:text-primary-900 uppercase underline decoration-4 underline-offset-4">support@zignature.co.in</a>
             </div>
 
             <div className="bg-primary-900 text-white border-4 border-primary-900 p-6 md:p-8 shadow-[8px_8px_0_0_#1e3a8a] hover:-translate-y-1 transition-transform">
@@ -63,7 +63,7 @@ const ContactPage = ({ embedded = false }) => {
               </div>
               <h3 className="text-2xl font-black uppercase tracking-tighter mb-2">Employer Sales</h3>
               <p className="text-primary-200 font-bold mb-4">Want to post jobs in bulk or need a custom hiring solution?</p>
-              <a href="mailto:employers@zignature.com" className="text-lg font-black text-white hover:text-primary-300 uppercase underline decoration-4 underline-offset-4">employers@zignature.com</a>
+              <a href="mailto:employers@zignature.com" className="text-lg font-black text-white hover:text-primary-300 uppercase underline decoration-4 underline-offset-4">employers@zignature.co.in</a>
             </div>
 
             <div className="bg-primary-100 border-4 border-primary-900 p-6 md:p-8 shadow-[8px_8px_0_0_#1e3a8a] hover:-translate-y-1 transition-transform">
@@ -72,9 +72,11 @@ const ContactPage = ({ embedded = false }) => {
               </div>
               <h3 className="text-2xl font-black text-primary-900 uppercase tracking-tighter mb-2">Global HQ</h3>
               <p className="text-primary-800 font-bold">
-                123 Innovation Drive<br />
-                Tech District, NY 10001<br />
-                United States
+                2nd Floor, KC Arcade<br />
+                Near TV Centre<br />
+                CSEZ P.O, Kakkanad<br />
+                Kochi, Kerala – 682037<br />
+                India
               </p>
             </div>
 
@@ -112,7 +114,7 @@ const ContactPage = ({ embedded = false }) => {
                     <input 
                       type="email" id="email"
                       className="w-full bg-primary-50 border-2 border-primary-900 p-4 font-bold text-primary-900 focus:outline-none focus:bg-white focus:shadow-[4px_4px_0_0_#1e3a8a] transition-all"
-                      placeholder="john@example.com"
+                      placeholder="Email Address"
                     />
                   </div>
                   <div className="flex flex-col">

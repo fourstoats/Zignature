@@ -138,9 +138,9 @@ const LoginPage = () => {
                     Keep me signed in on this device
                   </label>
                 </div>
-                <a href="#" className="text-sm font-bold text-primary-900 hover:underline">
+                {/* <a href="#" className="text-sm font-bold text-primary-900 hover:underline">
                   Forgot password?
-                </a>
+                </a> */}
               </div>
 
               <button 
@@ -153,7 +153,7 @@ const LoginPage = () => {
             </form>
 
              {/* google */}
-            {/* <div className="mt-6 pt-6 border-t-2 border-primary-900/20">
+            <div className="mt-6 pt-6 border-t-2 border-primary-900/20">
               <p className="text-primary-900/60 font-mono text-xs uppercase tracking-widest mb-4 text-center">Or continue with</p>
               {GOOGLE_CLIENT_ID && GOOGLE_CLIENT_ID !== 'your-google-client-id' ? (
                 <GoogleLogin
@@ -182,7 +182,7 @@ const LoginPage = () => {
                   Google
                 </button>
               )}
-            </div> */}
+            </div>
           </div>
 
           <p className="mt-6 text-center text-primary-900">

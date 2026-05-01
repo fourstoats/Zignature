@@ -54,6 +54,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     # CorsMiddleware MUST be first — before any response-generating middleware
     "corsheaders.middleware.CorsMiddleware",
+    "config.settings.safari_middleware.SafariSameSiteMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -210,6 +211,8 @@ SIMPLE_JWT = {
     # This is what makes the auth work on every browser and device.
     # The CORS policy + httpOnly + Secure are our actual security layers.
     "AUTH_COOKIE_SAMESITE": "None",
+    "AUTH_COOKIE_SECURE": True,
+    "AUTH_COOKIE_HTTP_ONLY": True,
 }
 
 DJANGO_ADMIN_URL = env("DJANGO_ADMIN_URL", default="admin/")
