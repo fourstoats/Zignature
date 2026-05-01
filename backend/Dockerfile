@@ -9,9 +9,6 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set uv to create venv at /app/.venv
-ENV UV_PROJECT_ENVIRONMENT=/app/.venv
-
 # Copy dependency files and install
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev --python 3.12
@@ -19,8 +16,8 @@ RUN uv sync --frozen --no-dev --python 3.12
 # Copy application code
 COPY . .
 
-# Create start script - use full paths to venv
-RUN printf '#!/bin/sh\nset -e\necho "Running migrations..."\n/app/.venv/bin/python manage.py migrate\necho "Starting gunicorn on port ${PORT:-8000}..."\n/app/.venv/bin/gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000} --access-logfile - --error-logfile -\n' > /app/start.sh && chmod +x /app/start.sh
+# Create start script using 'uv run' to automatically find the venv
+RUN printf '#!/bin/sh\nset -e\necho "Running migrations..."\nuv run python manage.py migrate\necho "Starting gunicorn on port ${PORT:-8000}..."\nuv run gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000} --access-logfile - --error-logfile -\n' > /app/start.sh && chmod +x /app/start.sh
 
 EXPOSE 8000
 
