@@ -9,25 +9,18 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Set uv to create venv at /app/.venv
+ENV UV_PROJECT_ENVIRONMENT=/app/.venv
+
 # Copy dependency files and install
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev --python 3.12 --path /app/.venv
+RUN uv sync --frozen --no-dev --python 3.12
 
 # Copy application code
 COPY . .
 
-# Debug: Check where gunicorn is installed
-RUN /app/.venv/bin/which gunicorn || echo "gunicorn not found in .venv/bin"
-RUN ls -la /app/.venv/bin/ | grep -i gunicorn || echo "No gunicorn in bin"
-
-# Create start script - use full paths
-RUN echo '#!/bin/sh' > /app/start.sh && \
-    echo 'set -e' >> /app/start.sh && \
-    echo 'echo "Running migrations..."' >> /app/start.sh && \
-    echo '/app/.venv/bin/python manage.py migrate' >> /app/start.sh && \
-    echo 'echo "Starting gunicorn on port ${PORT:-8000}..."' >> /app/start.sh && \
-    echo '/app/.venv/bin/gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000} --access-logfile - --error-logfile -' >> /app/start.sh && \
-    chmod +x /app/start.sh
+# Create start script - use full paths to venv
+RUN printf '#!/bin/sh\nset -e\necho "Running migrations..."\n/app/.venv/bin/python manage.py migrate\necho "Starting gunicorn on port ${PORT:-8000}..."\n/app/.venv/bin/gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000} --access-logfile - --error-logfile -\n' > /app/start.sh && chmod +x /app/start.sh
 
 EXPOSE 8000
 
