@@ -11,15 +11,22 @@ ENV PYTHONUNBUFFERED=1
 
 # Copy dependency files and install
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
+RUN uv sync --frozen --no-dev --python 3.12 && ln -s /app/.venv/bin /app/bin
 
 # Copy application code
 COPY . .
 
-# Collect static files (if using whitenoise or similar)
-# RUN uv run python manage.py collectstatic --noinput
+# Create start script for better error handling
+RUN echo '#!/bin/sh' > /app/start.sh && \
+    echo 'echo "Running migrations..."' >> /app/start.sh && \
+    echo 'python manage.py migrate' >> /app/start.sh && \
+    echo 'echo "Starting gunicorn on port ${PORT:-8000}..."' >> /app/start.sh && \
+    echo 'gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000} --access-logfile - --error-logfile -' >> /app/start.sh && \
+    chmod +x /app/start.sh
 
 EXPOSE 8000
 
-# Run migrations and start gunicorn (production server)
-CMD ["sh", "-c", "uv run python manage.py migrate && uv run gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
+# Use start script with proper PATH to venv
+ENV PATH="/app/.venv/bin:$PATH"
+
+CMD ["/app/start.sh"]
