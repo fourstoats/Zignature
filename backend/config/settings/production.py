@@ -12,11 +12,11 @@ DEBUG = False
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": environ.Env()("DB_NAME"),
-        "USER": environ.Env()("DB_USER"),
-        "PASSWORD": environ.Env()("DB_PASSWORD"),
-        "HOST": environ.Env()("DB_HOST"),
-        "PORT": environ.Env()("DB_PORT"),
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
         "CONN_MAX_AGE": 60,
         "OPTIONS": {
             "sslmode": "require",
@@ -32,9 +32,8 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_SSL_REDIRECT = True
 
-# Parse CSRF_TRUSTED_ORIGINS from comma-separated string
-_csrf_origins = environ.Env()("CSRF_TRUSTED_ORIGINS", default="")
-CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in _csrf_origins.split(",") if origin.strip()]
+# Parse CSRF_TRUSTED_ORIGINS from environment (environ.Env handles list type)
+CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", default=[])
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SESSION_COOKIE_SECURE = True

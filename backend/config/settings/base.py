@@ -157,9 +157,8 @@ SPECTACULAR_SETTINGS = {
 #   1. The server has CORS_ALLOW_CREDENTIALS = True
 #   2. The cookie has SameSite=None; Secure
 
-# Parse CORS_ALLOWED_ORIGINS from comma-separated string
-_cors_origins = env("CORS_ALLOWED_ORIGINS", default="")
-CORS_ALLOWED_ORIGINS = [origin.strip() for origin in _cors_origins.split(",") if origin.strip()]
+# CORS_ALLOWED_ORIGINS - environ.Env handles list type automatically
+CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS", default=[])
 
 CORS_ALLOW_CREDENTIALS = True  # ← CRITICAL for cookie support
 
