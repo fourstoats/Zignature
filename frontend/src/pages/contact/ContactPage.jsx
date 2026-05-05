@@ -70,7 +70,7 @@ const ContactPage = ({ embedded = false }) => {
               <div className="w-14 h-14 bg-white border-4 border-primary-900 flex items-center justify-center mb-6 shadow-[4px_4px_0_0_#1e3a8a]">
                 <HiOutlineEnvelope className="w-7 h-7 text-primary-900" />
               </div>
-              <h3 className="text-2xl font-black text-primary-900 uppercase tracking-tighter mb-2">Global HQ</h3>
+              <h3 className="text-2xl font-black text-primary-900 uppercase tracking-tighter mb-2">ZIGNATURE SEMANTICS PRIVATE LIMITED</h3>
               <p className="text-primary-800 font-bold">
                 2nd Floor, KC Arcade<br />
                 Near TV Centre<br />
